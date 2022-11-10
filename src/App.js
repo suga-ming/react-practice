@@ -5,7 +5,13 @@ import { QueryClient, QueryClientProvider } from "react-query";
 // import {QueryClient}
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: Infinity,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
