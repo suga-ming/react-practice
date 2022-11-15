@@ -24,16 +24,6 @@ function App() {
     }
   };
 
-  const handleSelect = (e) => {
-    setSelected(e.target.value);
-    console.log("나와라", selected);
-  };
-
-  const handelMoney = (e) => {
-    setMoney(e.target.value);
-    console.log("나와라2", money);
-  };
-
   useEffect(() => {
     // async () => {};
     //  fetch("https://api.coinpaprika.com/v1/tickers")
@@ -65,7 +55,7 @@ function App() {
       ) : (
         <>
           <br />
-          <select onChange={handleSelect}>
+          <select onChange={(e) => setSelected(e.target.value)}>
             {coin.map((item) => (
               <option value={item.quotes.USD.ath_price}>
                 {item.name} ({item.symbol}) : ${item.quotes.USD.ath_price} USD
@@ -78,7 +68,8 @@ function App() {
           <br />
           <br />
           <form>
-            내가 가지고 있는 가격: <input onChange={handelMoney}></input>
+            내가 가지고 있는 가격:{" "}
+            <input onChange={(e) => setMoney(e.target.value)}></input>
             <br />살 수 있는 갯수: {Math.floor(money / selected)}
           </form>
 
