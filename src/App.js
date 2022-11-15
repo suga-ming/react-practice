@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 function App() {
   const [loading, setLoading] = useState(true);
   const [coin, setCoin] = useState([]);
+  const [selected, setSelected] = useState("");
 
   const coinApi = async () => {
     try {
@@ -22,6 +23,11 @@ function App() {
     }
   };
 
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+    console.log("나와라", selected);
+  };
+
   useEffect(() => {
     // async () => {};
     //  fetch("https://api.coinpaprika.com/v1/tickers")
@@ -32,6 +38,10 @@ function App() {
     // });
     coinApi();
   }, []);
+
+  // useEffect(() => {
+  //   console.log(selected);
+  // }, [selected]);
 
   // const queryClient = new QueryClient({
   //   defaultOptions: {
@@ -49,15 +59,17 @@ function App() {
       ) : (
         <>
           <br />
-          <select>
+          <select onChange={handleSelect}>
             {coin.map((item) => (
               <option>
                 {item.name} ({item.symbol}) : ${item.quotes.USD.ath_price} USD
               </option>
+              // {item.quotes.USD.ath_price}
               // <input placeholder="$20" />
               // <span>총 {coin.quotes.USD.ath_price}</span>
             ))}
           </select>
+          {selected}
         </>
       )}
     </>
