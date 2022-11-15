@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 function App() {
   const [loading, setLoading] = useState(true);
   const [coin, setCoin] = useState([]);
+  const [money, setMoney] = useState("");
   const [selected, setSelected] = useState("");
 
   const coinApi = async () => {
@@ -26,6 +27,11 @@ function App() {
   const handleSelect = (e) => {
     setSelected(e.target.value);
     console.log("나와라", selected);
+  };
+
+  const handelMoney = (e) => {
+    setMoney(e.target.value);
+    console.log("나와라2", money);
   };
 
   useEffect(() => {
@@ -61,7 +67,7 @@ function App() {
           <br />
           <select onChange={handleSelect}>
             {coin.map((item) => (
-              <option>
+              <option value={item.quotes.USD.ath_price}>
                 {item.name} ({item.symbol}) : ${item.quotes.USD.ath_price} USD
               </option>
               // {item.quotes.USD.ath_price}
@@ -69,7 +75,15 @@ function App() {
               // <span>총 {coin.quotes.USD.ath_price}</span>
             ))}
           </select>
-          {selected}
+          <br />
+          <br />
+          <form>
+            내가 가지고 있는 가격: <input onChange={handelMoney}></input>
+            <br />살 수 있는 갯수: {Math.floor(money / selected)}
+          </form>
+
+          {console.log(typeof selected)}
+          {console.log(money)}
         </>
       )}
     </>
