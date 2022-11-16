@@ -6,12 +6,14 @@ import Home from "./pages/Home";
 import Edit from "./pages/Edit";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Coin from "./practice/Coin";
+import Movie_pj from "./practice/Movie/Movie_pj";
 // import {QueryClient}
 
 function App() {
   return (
     <>
-      <Coin />
+      {/* <Coin /> */}
+      <Movie_pj />
     </>
     // <QueryClientProvider client={queryClient}>
     //   <BrowserRouter>
